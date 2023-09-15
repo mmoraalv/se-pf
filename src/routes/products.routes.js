@@ -3,7 +3,7 @@ import productModel from "../models/products.models.js";
 
 const productRouter = Router()
 
-routerProd.get('/', async (req, res) => {
+productRouter.get('/', async (req, res) => {
 	const { limit, page, sort, category, status } = req.query;
 	let sortOption;
 	sort == 'asc' && (sortOption = 'price');
