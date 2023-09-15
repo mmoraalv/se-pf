@@ -1,38 +1,41 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 const productSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    stock: {
-        type: Number,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    status: {
-        type: Boolean,
-        default: true
-    },
-    code: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    thumbnails: []
-})
+	title: {
+		type: String,
+		required: true,
+	},
+	description: {
+		type: String,
+		required: true,
+	},
+	category: {
+		type: String,
+		required: true,
+	},
+	price: {
+		type: Number,
+		required: true,
+	},
+	stock: {
+		type: Number,
+		required: true,
+	},
+	code: {
+		type: String,
+		required: true,
+		unique: true,
+	},
+	status: {
+		type: Boolean,
+		default: true,
+	},
+	thumbnail: [],
+});
 
-const productModel = model('products', productSchema)
+productSchema.plugin(paginate);
 
-export default productModel
+const productModel = model('products', productSchema);
+
+export default productModel;
