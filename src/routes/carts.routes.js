@@ -48,7 +48,7 @@ cartRouter.put('/:cid/product/:pid', async (req, res) => {
 		}
 
 		if (cart) {
-			const productExists = cart.products.find(prod => prod.id_prod == pid);
+			const productExists = cart.products.find(prod => prod.id_prod._id == pid);
 			productExists
 				? productExists.quantity++
 				: cart.products.push({ id_prod: product._id, quantity: 1 });
@@ -69,7 +69,7 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
   try {
     const cart = await cartModel.findById(cid);
     if (cart) {
-      const productIndex = cart.products.findIndex(prod => prod.id_prod == pid);
+      const productIndex = cart.products.findIndex(prod => prod.id_prod._id == pid);
       let deletedProduct;
       if (productIndex !== -1) {
         deletedProduct = cart.products[productIndex];
@@ -95,7 +95,7 @@ cartRouter.put('/:cid', async (req, res) => {
 	try {
 		const cart = await cartModel.findById(cid);
 		updateProducts.forEach(prod => {
-			const productExists = cart.products.find(cartProd => cartProd.id_prod == prod.id_prod);
+			const productExists = cart.products.find(cartProd => cartProd.id_prod._id == prod.id_prod);
 			if (productExists) {
 				productExists.quantity += prod.quantity;
 			} else {
@@ -119,7 +119,7 @@ cartRouter.put('/:cid/products/:pid', async (req, res) => {
 		const cart = await cartModel.findById(cid);
 
 		if (cart) {
-			const productExists = cart.products.find(prod => prod.id_prod == pid);
+			const productExists = cart.products.find(prod => prod.id_prod._id == pid);
 			if (productExists) {
 				productExists.quantity += quantity;
 			} else {
